@@ -21,7 +21,7 @@ class AuthController extends Controller
         $data['password'] = bcrypt($data['password']);
         $user = $this->authUserRepository->signUp($data);
 
-        return new UserResource($user);
+        return response(new UserResource($user), 200);
     }
 
 
@@ -40,7 +40,7 @@ class AuthController extends Controller
         return 'user not found';
     }
 
-    
+
     public function logout()
     {
         $this->authUserRepository->logout();

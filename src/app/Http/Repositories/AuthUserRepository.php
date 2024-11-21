@@ -18,28 +18,40 @@ class AuthUserRepository extends BaseRepository implements AuthUserInterface
   public function signUp(array $data): Model
   {
     $user = $this->model->create($data);
-    $user->token = $user->createToken('Api Token')->accessToken;
+    $user->token = $this->createToken($user);
 
     return $user;
   }
 
-  public function login(array $data): Model
+
+  public function authAttempt(array $data): bool
   {
     if (Auth::attempt($data)) {
-      $token = auth()->user()->createToken('Api Token')->accessToken;
       return true;
     }
 
     return false;
   }
 
+
+  public function createToken($user): string
+  {
+    $token = $user->createToken('Api Token')->accessToken;
+
+    return $token;
+  }
+
+
   public function resetPassword(array $data): Model
   {
     
   }
 
+  
   public function logout()
   {
+    $user = Auth::user()->token()->revoke();
 
+    return true;
   }
 }

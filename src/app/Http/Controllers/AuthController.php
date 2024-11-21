@@ -28,9 +28,23 @@ class AuthController extends Controller
     public function login(AuthLoginRequest $requset)
     {
         $data = $requset->validated();
-        $data['password'] = bcrypt($data['password']);
-        $user = $this->authUserRepository->login($data);
+        $authAttempt = $this->authUserRepository->authAttempt($data);
+        if ($authAttempt) {
+           $user = auth()->user();
+           $token = $this->authUserRepository->createToken($user);
+           $user->token = $token;
 
-        return new UserResource($user);
+           return new UserResource($user);
+        }
+
+        return 'user not found';
+    }
+
+    
+    public function logout()
+    {
+        $this->authUserRepository->logout();
+
+        return 'logged out';
     }
 }

@@ -47,4 +47,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getSignupUrlAttribute()
+    {
+        return env('PREFIX_URL') . '/auth/sign-up';
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Repositories\AuthUserRepository;
+use App\Repositories\AuthUserRepository;
 use App\Http\Requests\Auth\AuthLoginRequest;
 use App\Http\Requests\Auth\AuthSignUpRequest;
 use App\Http\Resources\Auth\UserResource;

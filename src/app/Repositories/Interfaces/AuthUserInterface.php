@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Repositories\Interfaces;
+namespace App\Repositories\Interfaces;
 
-use App\Http\Requests\Auth\AuthSignUpRequest;
 use Illuminate\Database\Eloquent\Model;
 
 interface AuthUserInterface

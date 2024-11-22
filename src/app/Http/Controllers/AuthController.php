@@ -6,10 +6,12 @@ use App\Repositories\AuthUserRepository;
 use App\Http\Requests\Auth\AuthLoginRequest;
 use App\Http\Requests\Auth\AuthSignUpRequest;
 use App\Http\Resources\Auth\UserResource;
+use App\Responors\AuthRespondor;
+use App\Responors\BaseRespondor;
 
 class AuthController extends Controller
 {
-    public function __construct(public AuthUserRepository $authUserRepository)
+    public function __construct(public AuthUserRepository $authUserRepository, public AuthRespondor $authRespondor)
     {
         
     }
@@ -21,7 +23,7 @@ class AuthController extends Controller
         $data['password'] = bcrypt($data['password']);
         $user = $this->authUserRepository->signUp($data);
 
-        return response(new UserResource($user), 200);
+        return $this->authRespondor->respondResource($user, 200);
     }
 
 
@@ -34,7 +36,7 @@ class AuthController extends Controller
            $token = $this->authUserRepository->createToken($user);
            $user->token = $token;
 
-           return new UserResource($user);
+           return $this->authRespondor->respondResource($user, 200);
         }
 
         return 'user not found';

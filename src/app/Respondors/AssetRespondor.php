@@ -2,14 +2,14 @@
 
 namespace App\Respondors;
 
-use App\Http\Resources\Auth\UserCollection;
-use App\Http\Resources\Auth\UserResource;
+use App\Http\Resources\Asset\AssetCollection;
+use App\Http\Resources\Asset\AssetResource;
 
-class AuthRespondor extends BaseRespondor
+class AssetRespondor extends BaseRespondor
 {
   public function respondResource(mixed $data, $status)
   {
-    $data = new UserResource($data);
+    $data = new AssetResource($data);
 
     return $this->apiResponse($data, $status);
   }
@@ -17,7 +17,7 @@ class AuthRespondor extends BaseRespondor
 
   public function respondCollection(mixed $data, $status)
   {
-    $data = new UserCollection($data);
+    $data = new AssetCollection($data);
 
     return $this->apiResponse($data, $status);
   }

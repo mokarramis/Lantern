@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\Asset;
 
+use App\Models\Coin;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GoldRequset extends FormRequest
+use function PHPSTORM_META\type;
+
+class CoinRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +25,11 @@ class GoldRequset extends FormRequest
     public function rules(): array
     {
         return [
-            'carat'          => 'required|string',
-            'weight'         => 'required|string',
-            'purchase_price' => 'required|integer',
-            'purchase_time'  => 'nullable|date',
-            'other'          => 'nullable|string'
+            'type' => 'required|in:'. implode(',', Coin::type), 
+            'quantity' => 'required|integer', 
+            'purchase_price' => 'required|integer', 
+            'purchase_time' => 'nullable|date', 
+            'other' => 'nullable|string'
         ];
     }
 }

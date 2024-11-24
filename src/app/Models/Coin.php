@@ -9,4 +9,6 @@ class Coin extends Model
     protected $fillable = [
         'user_id', 'type', 'quantity', 'purchase_price', 'purchase_time', 'other'
     ];
+
+    const type = ['bahar','emami','nim','rob','gerami'];
 }

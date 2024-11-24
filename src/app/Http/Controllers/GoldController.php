@@ -12,26 +12,27 @@ class GoldController extends Controller
     {
         
     }
-    public function store(GoldRequset $request, Gold $gold)
+    public function store(GoldRequset $request)
     {
         $data = $request->validated();
-        $asset = $gold->create($data);
+        $data['user_id'] = auth()->user()->id;
+        $asset = Gold::create($data);
 
         return $this->goldRespondor->respondResource($asset, 200);
     }
 
-    public function update(GoldRequset $request, Gold $gold)
+    public function update(Gold $gold, GoldRequset $request)
     {
         $data = $request->validated();
-        $asset = $gold->update($data);
+        $gold->update($data);
 
-        return $this->goldRespondor->respondResource($asset, 200);
+        return $this->goldRespondor->respondResource($gold, 200);
     }
 
     public function destroy(Gold $gold)
     {
-        $asset = $gold->delete();
+        $gold->delete();
 
-        return $this->goldRespondor->respondResource($asset, 200);
+        return 'deleted';
     }
 }

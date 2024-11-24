@@ -3,8 +3,9 @@
 namespace App\Respondors;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\ResponseFactory;
 
-class BaseRespondor
+class BaseRespondor extends ResponseFactory
 {
   public function apiResponse($data, $message, $statusCode=200): JsonResponse
   {

@@ -23,7 +23,7 @@ class AssetController extends Controller
         return $this->assetRespondor->respondResource($asset, 200);
     }
 
-    public function update(AssetRequest $request, Asset $asset)
+    public function update(Asset $asset, AssetRequest $request)
     {
         $data = $request->validated();
         $asset = $asset->update($data);

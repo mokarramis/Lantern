@@ -20,5 +20,6 @@ class AuthRespondor extends BaseRespondor
     $data = new UserCollection($data);
 
     return $this->apiResponse($data, $status);
+    
   }
 }

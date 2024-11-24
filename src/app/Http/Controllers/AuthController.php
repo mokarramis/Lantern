@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\AuthUserRepository;
 use App\Http\Requests\Auth\AuthLoginRequest;
 use App\Http\Requests\Auth\AuthSignUpRequest;
-use App\Http\Resources\Auth\UserResource;
-use App\Responors\AuthRespondor;
-use App\Responors\BaseRespondor;
+use App\Respondors\AuthRespondor;
 
 class AuthController extends Controller
 {

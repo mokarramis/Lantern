@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('name');
-            $table->bigInteger('purchse_price')->default(0);
+            $table->bigInteger('purchase_price')->default(0);
             $table->dateTime('purchase_time')->nullable();
             $table->mediumText('other')->nullable();
             $table->timestamps();

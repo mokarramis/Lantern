@@ -22,18 +22,61 @@ class SignUpTest extends TestCase
         $this->user     = new User();
         $this->username = 'username';
         $this->password = 'password';
-        $this->email    = 'emil@mail.com';
+        $this->email    = 'emil1@mail.com';
         $this->url      = $this->user->signup_url;
     }
 
-    public function test_user_can_sign_up()
+    public function test_required_fields()
+    {
+        $response = $this->post('api' . $this->url, []);
+        $response->assertStatus(422);
+    }
+
+    public function test_email_should_be_unique()
     {
         $data = [
             'username' => $this->username,
             'password' => $this->password,
             'email'    => $this->email
         ];
-        $response = $this->post($this->url, $data);
-        $response->assertStatus(200);
+
+        $response = $this->post('api' . $this->url, $data);
+        $response->assertStatus(422)->assertJson(['message' => 'The email has already been taken.']);
+    }
+
+    public function test_email_should_be_type_email()
+    {
+        $data = [
+            'username' => $this->username,
+            'password' => $this->password,
+            'email'    => 'mail_gmail.com'
+        ];
+
+        $response = $this->post('api' . $this->url, $data);
+        $response->assertStatus(422)->assertJson(['message' => 'The email field must be a valid email address.']);
+    }
+
+    public function test_username_should_be_more_than_5_chars()
+    {
+        $data = [
+            'username' => 'user',
+            'password' => $this->password,
+            'email'    => 'email123@mail.com'
+        ];
+
+        $response = $this->post('api' . $this->url, $data);
+        $response->assertStatus(422)->assertJson(['message' => 'The username field must be at least 5 characters.']);
+    }
+
+    public function test_password_should_be_more_than_8_chars()
+    {
+        $data = [
+            'username' => $this->username,
+            'password' => '123',
+            'email'    => $this->email
+        ];
+
+        $response = $this->post('api' . $this->url, $data);
+        $response->assertStatus(422)->assertJson(['message' => 'The password field must be at least 8 characters.']);
     }
 }

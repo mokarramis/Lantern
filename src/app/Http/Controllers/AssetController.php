@@ -18,6 +18,7 @@ class AssetController extends Controller
     public function store(AssetRequest $request)
     {
         $data = $request->validated();
+        $data['user_id'] = auth()->user()->id;
         $asset = $this->assetRepository->create($data);
 
         return $this->assetRespondor->respondResource($asset, 200);
@@ -26,7 +27,7 @@ class AssetController extends Controller
     public function update(Asset $asset, AssetRequest $request)
     {
         $data = $request->validated();
-        $asset = $asset->update($data);
+        $asset->update($data);
 
         return $this->assetRespondor->respondResource($asset, 200);
     }

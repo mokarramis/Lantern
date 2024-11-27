@@ -9,7 +9,7 @@ class Asset extends Model
 {
     use HasFactory;
 
-    protected $guarded = [
+    protected $fillable = [
         'user_id', 'name', 'purchase_price', 'purchase_time', 'other'
     ];
 

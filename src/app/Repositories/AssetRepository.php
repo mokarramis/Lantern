@@ -11,4 +11,11 @@ class AssetRepository extends BaseRepository implements AssetInterface
   {
     parent::__construct($asset);
   }
+
+  public function create(array $data)
+  {
+    $asset = $this->model->create($data);
+
+    return $asset;
+  }
 }

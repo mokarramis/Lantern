@@ -22,7 +22,6 @@ class AssetRequest extends FormRequest
     public function rules(): array
     {
         $data = [
-            'user_id'        => 'required|exists:users,id', 
             'name'           => 'required|string|min:3',
             'purchase_price' => 'required|integer', 
             'purchase_time'  => 'nullable|date', 

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Transaction\TransactionRequest;
+use App\Models\Account;
+use App\Models\Cash;
 use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use App\Respondors\TransactionRespondor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,17 +18,17 @@ class TransactionController extends Controller
     {
         
     }
-    /**
-     * Display a listing of the resource.
-     */
+   
+    
     public function index()
     {
-        //
+        $userId = Auth()->user()->id;
+        $transactions = Transaction::query()->where('user_id', $userId)->thisMonth()->paginate(10);
+
+        return $this->transactionRespondor->respondCollection($transactions, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(TransactionRequest $request)
     {
         $data = $request->validated();
@@ -36,27 +39,9 @@ class TransactionController extends Controller
         return $this->transactionRespondor->respondResource($transaction, 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Transaction $transaction)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $this->transactionRepository->delete($transaction);
     }
 }

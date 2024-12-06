@@ -17,7 +17,7 @@ class TransactionCollection extends ResourceCollection
         return [
             'items'      => TransactionResource::collection($this->collection),
             'pagination' => [
-                'total'              => $this->total(),
+                'total'             => $this->total(),
                 'count'             => $this->count(),
                 'per_page'          => $this->perPage(),
                 'current_page'      => $this->currentPage(),

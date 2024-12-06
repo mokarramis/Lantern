@@ -20,7 +20,7 @@ class TransactionRepository extends BaseRepository implements TransactionInterfa
 
     try {
       $model = $transaction->transactionable;
-      $this->updateMorphRelation($data, $model);
+      $this->updateMorphRelation($data['price'], $model, $data['category']);
     } catch (\Exception $e) {
       return $e->getMessage();
     }
@@ -28,18 +28,18 @@ class TransactionRepository extends BaseRepository implements TransactionInterfa
     return $transaction;
   }
 
-  public function updateMorphRelation(array $data, $model)
+  public function updateMorphRelation($transactionPrice, $model, $category)
   {
     try {
-      if ($data['category'] == 'paid') {
+      if ($category == 'paid') {
         $model->update([
-            'amount' => $model->amount - $data['price']
+            'amount' => $model->amount - $transactionPrice
         ]);
       }
   
-      if ($data['category'] == 'received') {
-          $data = $data['transactinable_type']->update([
-              'amount' => $model->amount + $data['price']
+      if ($category == 'received') {
+          $model->update([
+              'amount' => $model->amount + $transactionPrice
           ]);
       }
     } catch (\Exception $e) {
@@ -47,6 +47,44 @@ class TransactionRepository extends BaseRepository implements TransactionInterfa
     }
 
     return true;
+  }
+
+  public function deleteMorphRelation($transactionPrice, $model, $category)
+  {
+    try {
+      if ($category == 'paid') {
+        $model->update([
+            'amount' => $model->amount + $transactionPrice
+        ]);
+      }
+  
+      if ($category == 'received') {
+          $model->update([
+              'amount' => $model->amount - $transactionPrice
+          ]);
+      }
+    } catch (\Exception $e) {
+      
+    }
+
+    return true;
+  }
+
+  public function delete(Transaction $transaction)
+  {
+    $model = $transaction->transactionable;
+    $transactionPrice = $transaction->price;
+    $category = $transaction->category;
+    try {
+      $this->deleteMorphRelation($transactionPrice, $model, $category);
+    } catch (\Exception $e) {
+      $e->getMessage();
+    }
+
+    $transaction->delete();
+
+    return "deleted successfully.";
+
   }
 
 

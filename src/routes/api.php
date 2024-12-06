@@ -31,6 +31,4 @@ Route::group(['prefix' => 'assets', 'middleware' => 'auth:api'], function (){
 });
 
 
-Route::group(['prefix' => 'transaction', 'middleware' => 'auth:api'], function (){
-    Route::apiResource('/', TransactionController::class);
-});
+Route::apiResource('/transaction', TransactionController::class)->middleware('auth:api');

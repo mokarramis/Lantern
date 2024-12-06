@@ -11,4 +11,9 @@ class Coin extends Model
     ];
 
     const type = ['bahar','emami','nim','rob','gerami'];
+
+    public function transaction()
+    {
+        return $this->morphOne(Transaction::class, 'transactionable');
+    }
 }

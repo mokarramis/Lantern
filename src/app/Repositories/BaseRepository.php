@@ -11,7 +11,7 @@ class BaseRepository
   {}
 
   
-  public function create(array $data)
+  public function create(array $data) : Model
   {
     $model = $this->model->create($data);
 

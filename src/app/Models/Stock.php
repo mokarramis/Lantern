@@ -9,4 +9,9 @@ class Stock extends Model
     protected $fillable = [
         'user_id', 'name', 'purchase_price', 'purchase_time', 'other'
     ];
+
+    public function transaction()
+    {
+        return $this->morphOne(Transaction::class, 'transactionable');
+    }
 }

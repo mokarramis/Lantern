@@ -7,6 +7,7 @@ use App\Http\Controllers\CashController;
 use App\Http\Controllers\CoinController;
 use App\Http\Controllers\GoldController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,3 +29,6 @@ Route::group(['prefix' => 'assets', 'middleware' => 'auth:api'], function (){
     Route::apiResource('coin', CoinController::class);
     Route::apiResource('stock', StockController::class);
 });
+
+
+Route::apiResource('/transaction', TransactionController::class)->middleware('auth:api');

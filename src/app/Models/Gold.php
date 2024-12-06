@@ -9,4 +9,9 @@ class Gold extends Model
     protected $fillable = [
         'user_id', 'carat', 'weight', 'purchase_price', 'purchase_time', 'other'
     ];
+
+    public function transaction()
+    {
+        return $this->morphOne(Transaction::class, 'transactionable');
+    }
 }

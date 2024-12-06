@@ -17,4 +17,9 @@ class Asset extends Model
     {
         return env('PREFIX_URL') . '/assets/other';
     }
+
+    public function transaction()
+    {
+        return $this->morphOne(Transaction::class, 'transactionable');
+    }
 }

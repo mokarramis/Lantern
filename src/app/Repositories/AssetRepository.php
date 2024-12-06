@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Asset;
 use App\Repositories\Interfaces\AssetInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class AssetRepository extends BaseRepository implements AssetInterface
 {
@@ -12,7 +13,7 @@ class AssetRepository extends BaseRepository implements AssetInterface
     parent::__construct($asset);
   }
 
-  public function create(array $data)
+  public function create(array $data): Model
   {
     $asset = $this->model->create($data);
 

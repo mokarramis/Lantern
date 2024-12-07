@@ -20,6 +20,7 @@ Route::group(['prefix' => 'auth'], function (){
 Route::group(['prefix' => 'assets', 'middleware' => 'auth:api'], function (){
     Route::group(['prefix' => 'other'], function (){
         Route::post('store', [AssetController::class, 'store']);
+        Route::get('index', [AssetController::class, 'index']);
         Route::put('update/{asset}', [AssetController::class, 'update']);
         Route::delete('destroy/{asset}', [AssetController::class, 'delete']);
     });

@@ -22,4 +22,9 @@ class Asset extends Model
     {
         return $this->morphOne(Transaction::class, 'transactionable');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

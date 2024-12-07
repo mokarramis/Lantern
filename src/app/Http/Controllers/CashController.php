@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Asset\CashRequest;
 use App\Models\Cash;
 use App\Respondors\CashRespondor;
+use Illuminate\Support\Facades\Auth;
 
 class CashController extends Controller
 {
@@ -12,6 +13,15 @@ class CashController extends Controller
     {
         
     }
+
+    public function index()
+    {
+        $user = Auth::user();
+        $cash = $user->cashes()->paginate(10);
+
+        return $this->cashRespondor->respondCollection($cash, 200);
+    }
+
     public function store(CashRequest $request)
     {
         $data = $request->validated();

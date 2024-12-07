@@ -50,6 +50,36 @@ class User extends Authenticatable
         ];
     }
 
+    public function coins()
+    {
+        return $this->hasMany(Coin::class);
+    }
+
+    public function assets()
+    {
+        return $this->hasMany(Asset::class);
+    }
+
+    public function golds()
+    {
+        return $this->hasMany(Gold::class);
+    }
+
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
+
+    public function cashes()
+    {
+        return $this->hasMany(Cash::class);
+    }
+
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
+    }
+
     public function getSignupUrlAttribute()
     {
         return env('PREFIX_URL') . '/auth/sign-up';

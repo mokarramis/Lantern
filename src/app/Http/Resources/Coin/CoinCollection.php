@@ -14,6 +14,17 @@ class CoinCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'items'      => CoinResource::collection($this->collection),
+            'pagination' => [
+                'total'             => $this->total(),
+                'count'             => $this->count(),
+                'per_page'          => $this->perPage(),
+                'current_page'      => $this->currentPage(),
+                'total_pages'       => $this->lastPage(),
+                'next_Page_Url'     => $this->nextPageUrl(),
+                'previous_Page_Url' => $this->previousPageUrl(),
+            ],
+        ];
     }
 }

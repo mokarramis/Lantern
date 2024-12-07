@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Asset\GoldRequset;
 use App\Models\Gold;
 use App\Respondors\GoldRespondor;
+use Illuminate\Support\Facades\Auth;
 
 class GoldController extends Controller
 {
@@ -12,6 +13,15 @@ class GoldController extends Controller
     {
         
     }
+
+    public function index()
+    {
+        $user = Auth::user();
+        $gold = $user->golds()->paginate(10);
+
+        return $this->goldRespondor->respondCollection($gold, 200);
+    }
+
     public function store(GoldRequset $request)
     {
         $data = $request->validated();

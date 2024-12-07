@@ -6,12 +6,21 @@ use App\Http\Requests\Asset\AssetRequest;
 use App\Models\Asset;
 use App\Repositories\AssetRepository;
 use App\Respondors\AssetRespondor;
+use Illuminate\Support\Facades\Auth;
 
 class AssetController extends Controller
 {
     public function __construct(public AssetRepository $assetRepository, public AssetRespondor $assetRespondor)
     {
         
+    }
+
+    public function index()
+    {
+        $user = Auth::user();
+        $asset = $user->assets;
+
+        return $this->assetRespondor->respondCollection($asset, 200);
     }
 
 

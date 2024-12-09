@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('type', ['bahar', 'emami', 'nim', 'rob', 'gerami']);
             $table->unsignedBigInteger('quantity');
             $table->bigInteger('purchase_price')->default(0);
-            $table->dateTime('purchase_time')->nullable();
+            $table->date('purchase_time')->nullable();
             $table->mediumText('other')->nullable();
             $table->timestamps();
         });

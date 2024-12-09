@@ -5,7 +5,7 @@ namespace App\Respondors;
 use App\Http\Resources\Asset\AssetCollection;
 use App\Http\Resources\Asset\AssetResource;
 
-class AssetRespondor extends BaseRespondor
+class OtherRespondor extends BaseRespondor
 {
   public function respondResource(mixed $data, $status)
   {

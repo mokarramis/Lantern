@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('carat');
             $table->string('weight');
             $table->bigInteger('purchase_price')->default(0);
-            $table->dateTime('purchase_time')->nullable();
+            $table->date('purchase_time')->nullable();
             $table->mediumText('other')->nullable();
             $table->timestamps();
         });

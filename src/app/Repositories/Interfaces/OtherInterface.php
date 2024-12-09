@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-interface AssetInterface
+interface OtherInterface
 {
 
 }

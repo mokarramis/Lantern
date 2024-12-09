@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('category', Transaction::CATEGORY);
             $table->foreignId('user_id')->constrained();
             $table->bigInteger('price')->default(0);
-            $table->dateTime('time');
+            $table->date('time');
             $table->mediumText('description')->nullable();
             $table->timestamps();
         });

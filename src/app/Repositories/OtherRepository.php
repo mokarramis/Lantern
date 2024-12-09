@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Models\Asset;
-use App\Repositories\Interfaces\AssetInterface;
+use App\Models\Other;
+use App\Repositories\Interfaces\OtherInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class AssetRepository extends BaseRepository implements AssetInterface
+class OtherRepository extends BaseRepository implements OtherInterface
 {
-  public function __construct(Asset $asset)
+  public function __construct(Other $asset)
   {
     parent::__construct($asset);
   }

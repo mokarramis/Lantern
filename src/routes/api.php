@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AssetController;
+use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\OtherController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CashController;
 use App\Http\Controllers\CoinController;
@@ -18,12 +19,7 @@ Route::group(['prefix' => 'auth'], function (){
 });
 
 Route::group(['prefix' => 'assets', 'middleware' => 'auth:api'], function (){
-    Route::group(['prefix' => 'other'], function (){
-        Route::post('store', [AssetController::class, 'store']);
-        Route::get('index', [AssetController::class, 'index']);
-        Route::put('update/{asset}', [AssetController::class, 'update']);
-        Route::delete('destroy/{asset}', [AssetController::class, 'delete']);
-    });
+    Route::apiResource('other', [OtherController::class]);
     Route::apiResource('gold', GoldController::class);
     Route::apiResource('cash', CashController::class);
     Route::apiResource('account', AccountController::class);
@@ -33,3 +29,4 @@ Route::group(['prefix' => 'assets', 'middleware' => 'auth:api'], function (){
 
 
 Route::apiResource('/transaction', TransactionController::class)->middleware('auth:api');
+Route::get('analysis', [AnalysisController::class, 'index'])->middleware('auth:api');

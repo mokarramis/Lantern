@@ -17,8 +17,7 @@ This project is a financial management platform that allows users to manage vari
 - Accounts
 - Coins
 - Stocks
-- Transaction Management API
-- - Transactions
+- Transactions
 
 3. Financial Analysis
 Analysis

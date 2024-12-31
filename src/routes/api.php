@@ -19,7 +19,7 @@ Route::group(['prefix' => 'auth'], function (){
 });
 
 Route::group(['prefix' => 'assets', 'middleware' => 'auth:api'], function (){
-    Route::apiResource('other', [OtherController::class]);
+    Route::apiResource('other', OtherController::class);
     Route::apiResource('gold', GoldController::class);
     Route::apiResource('cash', CashController::class);
     Route::apiResource('account', AccountController::class);
@@ -28,5 +28,5 @@ Route::group(['prefix' => 'assets', 'middleware' => 'auth:api'], function (){
 });
 
 
-Route::apiResource('/transaction', TransactionController::class)->middleware('auth:api');
+Route::apiResource('transaction', TransactionController::class)->middleware('auth:api');
 Route::get('analysis', [AnalysisController::class, 'index'])->middleware('auth:api');

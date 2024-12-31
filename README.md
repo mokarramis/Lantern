@@ -31,18 +31,18 @@ The database structure can be seen in the issue #2:
 ![Lantern](https://github.com/user-attachments/assets/40908879-1080-4431-bd75-894b562543b8)
 
 
-## How to Use
+## How to Run the project
 
 After Cloning the repository run:
 
-1. docker-compse build
-2. docker-compose up -d
-3. cd src
-4. docker-compose exec app php composer install
-5. cp .env.example .env
-6. docker-compose exec app php artisan key:generate
-7. docker compose exec app php artisan passport:keys
-8. docker-compose exec app php artisan migrate
-9. docker compose exec app php artisan passport:client --personal
-10. sudo chown -R $USER:$USER ./src/storage
+1. ``` docker-compse build ```
+2. ``` docker-compose up -d ```
+3. ``` cd src ```
+4. ``` docker-compose exec app php composer install ```
+5. ``` cp .env.example .env ```
+6. ``` docker-compose exec app php artisan key:generate ```
+7. ``` docker compose exec app php artisan passport:keys ```
+8. ``` docker-compose exec app php artisan migrate ```
+9. ``` docker compose exec app php artisan passport:client --personal ```
+10. ``` sudo chown -R $USER:$USER ./src/storage ```
 
